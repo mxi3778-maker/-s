@@ -1,0 +1,19 @@
+local LocalPlayer = game.Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+
+-- เปิดใช้งาน Auto Open
+local autoOpen = true
+
+task.spawn(function()
+	while autoOpen do
+		task.wait(0.5) -- เช็คทุกๆ 0.5 วินาที
+		
+		-- ค้นหา Prompt ในระยะ
+		for _, prompt in pairs(workspace:GetDescendants()) do
+			if prompt:IsA("ProximityPrompt") and prompt.Parent.Name:lower():find("chest") then
+				-- จำลองการกดปุ่มเปิดกล่อง
+				fireproximityprompt(prompt)
+			end
+		end
+	end
+end)
